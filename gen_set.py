@@ -18,7 +18,7 @@ def gen_set(file_name,*start_end):
   return file_set
 
 def gen_list(file_name,*start_end):
-  """Given a filename (for a fixed format file) and 1 or more start/end positions, returns a list of 'keys' extracted from the file."""
+  """Given a filename (for a fixed format file) and 1 or more start/end positions, returns a generator of 'keys' extracted from the file."""
   if 'gz' in file_name:
       iflines = gzip.open(file_name,'rb').readlines()
   else:
@@ -32,7 +32,7 @@ def gen_list(file_name,*start_end):
     yield '|'.join(keys)
 
 def gen_list_csv(file_name,delim, *field_positions):
-  """Given a filename (for a delimited file), a delimiter and 1 or more field positions, returns a list of 'keys' extracted from the file."""
+  """Given a filename (for a delimited file), a delimiter and 1 or more field positions, returns a generator of 'keys' extracted from the file."""
   if 'gz' in file_name:
       fh = csv.reader(gzip.open(file_name,'rb'),delimiter=delim)
   else:
